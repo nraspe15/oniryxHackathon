@@ -1,0 +1,51 @@
+entity Template {
+	id Long,
+    montant BigDecimal required,
+    label String required,
+    category Long required,
+    justification String required,
+    comment String,
+    provider String required,
+    employee Long
+}
+
+entity Category {
+	id Long,
+    label String required
+}
+
+entity Employee {
+	id Long,
+    trigram String required minlength(3) maxlength(3) pattern(/[A-Z]+/)    
+}
+
+entity ExpenseNote {
+	id Long,
+    montant BigDecimal required,
+    label String required,
+    category Long required,
+    justification String required,
+    comment String,
+    provider String required,
+    employee Long
+    submitDate Date required,
+    paymentDate Date
+}
+
+enum Status {
+	ENCODED,
+    SUSPENDED,
+    PAID,
+    REJECTED
+}
+
+relationship OneToMany {
+	Template{category} to Category,
+	ExpenseNote{category} to Category,
+    ExpenseNote{status} to Status
+}
+
+relationship OneToOne {
+	Template{employee} to Employee,
+    ExpenseNote{employee} to Employee
+}
