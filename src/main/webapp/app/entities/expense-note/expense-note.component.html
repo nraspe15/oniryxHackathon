@@ -1,0 +1,78 @@
+<div>
+    <h2>
+        <span>Expense Notes</span>
+        <button class="btn btn-primary float-right jh-create-entity create-expense-note" [routerLink]="['/', { outlets: { popup: ['expense-note-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Expense Note
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="expenseNotes">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Montant</span></th>
+            <th><span>Label</span></th>
+            <th><span>Justification</span></th>
+            <th><span>Comment</span></th>
+            <th><span>Provider</span></th>
+            <th><span>Submit Date</span></th>
+            <th><span>Payment Date</span></th>
+            <th><span>Status</span></th>
+            <th><span>Employee</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let expenseNote of expenseNotes ;trackBy: trackId">
+                <td><a [routerLink]="['../expense-note', expenseNote.id ]">{{expenseNote.id}}</a></td>
+                <td>{{expenseNote.montant}}</td>
+                <td>{{expenseNote.label}}</td>
+                <td>{{expenseNote.justification}}</td>
+                <td>{{expenseNote.comment}}</td>
+                <td>{{expenseNote.provider}}</td>
+                <td>{{expenseNote.submitDate | date:'mediumDate'}}</td>
+                <td>{{expenseNote.paymentDate | date:'mediumDate'}}</td>
+                <td>{{expenseNote.status}}</td>
+                <td>
+                    <div *ngIf="expenseNote.employee">
+                        <a [routerLink]="['../employee', expenseNote.employee?.id ]" >{{expenseNote.employee?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../expense-note', expenseNote.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'expense-note/'+ expenseNote.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'expense-note/'+ expenseNote.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

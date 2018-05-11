@@ -42,6 +42,12 @@ public class CacheConfiguration {
             cm.createCache(be.oniryx.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(be.oniryx.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(be.oniryx.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(be.oniryx.domain.Template.class.getName(), jcacheConfiguration);
+            cm.createCache(be.oniryx.domain.Template.class.getName() + ".categories", jcacheConfiguration);
+            cm.createCache(be.oniryx.domain.Category.class.getName(), jcacheConfiguration);
+            cm.createCache(be.oniryx.domain.Employee.class.getName(), jcacheConfiguration);
+            cm.createCache(be.oniryx.domain.ExpenseNote.class.getName(), jcacheConfiguration);
+            cm.createCache(be.oniryx.domain.ExpenseNote.class.getName() + ".categories", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

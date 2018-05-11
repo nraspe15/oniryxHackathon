@@ -1,0 +1,120 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myExpenseNoteLabel">Create or edit a Expense Note</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!expenseNote.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="expenseNote.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_montant">Montant</label>
+            <input type="number" class="form-control" name="montant" id="field_montant"
+                [(ngModel)]="expenseNote.montant" required/>
+            <div [hidden]="!(editForm.controls.montant?.dirty && editForm.controls.montant?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.montant?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.montant?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_label">Label</label>
+            <input type="text" class="form-control" name="label" id="field_label"
+                [(ngModel)]="expenseNote.label" required/>
+            <div [hidden]="!(editForm.controls.label?.dirty && editForm.controls.label?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.label?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_justification">Justification</label>
+            <input type="text" class="form-control" name="justification" id="field_justification"
+                [(ngModel)]="expenseNote.justification" required/>
+            <div [hidden]="!(editForm.controls.justification?.dirty && editForm.controls.justification?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.justification?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_comment">Comment</label>
+            <input type="text" class="form-control" name="comment" id="field_comment"
+                [(ngModel)]="expenseNote.comment" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_provider">Provider</label>
+            <input type="text" class="form-control" name="provider" id="field_provider"
+                [(ngModel)]="expenseNote.provider" required/>
+            <div [hidden]="!(editForm.controls.provider?.dirty && editForm.controls.provider?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.provider?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_submitDate">Submit Date</label>
+            <div class="input-group">
+                <input id="field_submitDate" type="text" class="form-control" name="submitDate" ngbDatepicker  #submitDateDp="ngbDatepicker" [(ngModel)]="expenseNote.submitDate"
+                required/>
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="submitDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.submitDate?.dirty && editForm.controls.submitDate?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.submitDate?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_paymentDate">Payment Date</label>
+            <div class="input-group">
+                <input id="field_paymentDate" type="text" class="form-control" name="paymentDate" ngbDatepicker  #paymentDateDp="ngbDatepicker" [(ngModel)]="expenseNote.paymentDate"
+                />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="paymentDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_status">Status</label>
+            <select class="form-control" name="status" [(ngModel)]="expenseNote.status" id="field_status" >
+                <option value="ENCODED">ENCODED</option>
+                <option value="SUSPENDED">SUSPENDED</option>
+                <option value="PAID">PAID</option>
+                <option value="REJECTED">REJECTED</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_employee">Employee</label>
+            <select class="form-control" id="field_employee" name="employee" [(ngModel)]="expenseNote.employee">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="employeeOption.id === expenseNote.employee?.id ? expenseNote.employee : employeeOption" *ngFor="let employeeOption of employees; trackBy: trackEmployeeById">{{employeeOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,72 @@
+<div>
+    <h2>
+        <span>Templates</span>
+        <button class="btn btn-primary float-right jh-create-entity create-template" [routerLink]="['/', { outlets: { popup: ['template-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Template
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="templates">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Montant</span></th>
+            <th><span>Label</span></th>
+            <th><span>Justification</span></th>
+            <th><span>Comment</span></th>
+            <th><span>Provider</span></th>
+            <th><span>Employee</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let template of templates ;trackBy: trackId">
+                <td><a [routerLink]="['../template', template.id ]">{{template.id}}</a></td>
+                <td>{{template.montant}}</td>
+                <td>{{template.label}}</td>
+                <td>{{template.justification}}</td>
+                <td>{{template.comment}}</td>
+                <td>{{template.provider}}</td>
+                <td>
+                    <div *ngIf="template.employee">
+                        <a [routerLink]="['../employee', template.employee?.id ]" >{{template.employee?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../template', template.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'template/'+ template.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'template/'+ template.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+
+<div *ngIf="expenseNote">
+    <h2><span>Expense Note</span> {{expenseNote.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Montant</span></dt>
+        <dd>
+            <span>{{expenseNote.montant}}</span>
+        </dd>
+        <dt><span>Label</span></dt>
+        <dd>
+            <span>{{expenseNote.label}}</span>
+        </dd>
+        <dt><span>Justification</span></dt>
+        <dd>
+            <span>{{expenseNote.justification}}</span>
+        </dd>
+        <dt><span>Comment</span></dt>
+        <dd>
+            <span>{{expenseNote.comment}}</span>
+        </dd>
+        <dt><span>Provider</span></dt>
+        <dd>
+            <span>{{expenseNote.provider}}</span>
+        </dd>
+        <dt><span>Submit Date</span></dt>
+        <dd>
+            <span>{{expenseNote.submitDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Payment Date</span></dt>
+        <dd>
+            <span>{{expenseNote.paymentDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+            <span>{{expenseNote.status}}</span>
+        </dd>
+        <dt><span>Employee</span></dt>
+        <dd>
+            <div *ngIf="expenseNote.employee">
+                <a [routerLink]="['/employee', expenseNote.employee?.id]">{{expenseNote.employee?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'expense-note/'+ expenseNote.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,38 @@
+
+<div *ngIf="category">
+    <h2><span>Category</span> {{category.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Label</span></dt>
+        <dd>
+            <span>{{category.label}}</span>
+        </dd>
+        <dt><span>Template</span></dt>
+        <dd>
+            <div *ngIf="category.template">
+                <a [routerLink]="['/template', category.template?.id]">{{category.template?.id}}</a>
+            </div>
+        </dd>
+        <dt><span>Expense Note</span></dt>
+        <dd>
+            <div *ngIf="category.expenseNote">
+                <a [routerLink]="['/expense-note', category.expenseNote?.id]">{{category.expenseNote?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'category/'+ category.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

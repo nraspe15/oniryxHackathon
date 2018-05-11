@@ -1,0 +1,34 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "template",
+            "otherEntityName": "template",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "employee"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "expenseNote",
+            "otherEntityName": "expenseNote",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "employee"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "trigram",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20180511123633",
+    "entityTableName": "employee",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}
