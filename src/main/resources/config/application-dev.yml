@@ -49,10 +49,10 @@ spring:
             hibernate.generate_statistics: true
             hibernate.cache.region.factory_class: io.github.jhipster.config.jcache.NoDefaultJCacheRegionFactory
     mail:
-        host: localhost
-        port: 25
-        username:
-        password:
+        host: smtp.office365.com
+        port: 587
+        username: nathan.raspe@guest.minfin.fed.be
+        password: P1P3line
     messages:
         cache-seconds: 1
     thymeleaf:
